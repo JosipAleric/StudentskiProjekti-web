@@ -1,41 +1,53 @@
 <template>
   <v-app>
-    <v-toolbar color="white" dark height="110" flat hide-on-scroll>
-      <v-toolbar-title class="ml-5">
-        <v-img contain src="./assets/logo.png" transition="scale-transition" height="80" />
-      </v-toolbar-title>
+    <v-app-bar app color="white" dark height="110" flat>
+      <v-app-bar-title class="ml-5">
+        <v-img contain src="./assets/logo.png" height="80" transition="scale-transition" />
+      </v-app-bar-title>
 
       <v-spacer></v-spacer>
       <v-toolbar-items id="nav" class="hidden-sm-and-down">
         <div>
-          <router-link to="/">Naslovnica</router-link>
+          <router-link to="/">Početna</router-link>
           <router-link to="/about">Projekti</router-link>
         </div>
       </v-toolbar-items>
       <v-spacer></v-spacer>
 
-      <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="40" width="150">Prijavi se</v-btn>
+      <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto">Prijavi se</v-btn>
       <v-btn icon @click="drawer = !drawer" large class="mr-5">
         <v-app-bar-nav-icon color="primary" class="hidden-md-and-up"></v-app-bar-nav-icon>
       </v-btn>
-    </v-toolbar>
+    </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute left app temporary>
-      <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
+      <v-list>
+        <v-list-item style="background-color: #094776; margin-top: -9px" class="d-flex justify-center">
+          <v-list-item-icon class="mx-auto">
+            <img src="./assets/sum-white.png" height="55px" />
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list>
+
+      <v-list nav >
+        <v-list-item-group v-model="group" active-class="primary--text text--accent-1">
+          <v-list-item to="/">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Početna</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
+          <v-list-item to="/about">
+            <v-list-item-icon>
+              <v-icon>mdi-file-document-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Projekti</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
+          <v-divider style="border: 1px solid rgb(192, 191, 191)" class="my-5"></v-divider>
 
           <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
+            <v-btn color="primary" rounded class="text-capitalize" height="40" width="auto">Prijavi se</v-btn>
           </v-list-item>
         </v-list-item-group>
       </v-list>
