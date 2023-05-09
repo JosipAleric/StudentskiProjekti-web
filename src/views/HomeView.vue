@@ -12,7 +12,7 @@
               Na ovom dijelu sustava možete pronaći detaljne informacije o studentskim projektima.
             </p>
             <div class="text-center">
-              <v-btn class="text-capitalize font-weight-medium" depressed color="primary" elevation="24" rounded height="50" width="150">Saznaj više</v-btn>
+              <v-btn class="text-capitalize font-weight-medium" depressed color="primary" elevation="24" rounded height="50" width="150" @click="$vuetify.goTo(target, options)">Saznaj više</v-btn>
             </div>
             <v-divider class="my-8" style="border: 1px solid rgb(192, 191, 191)"></v-divider>
           </div>
@@ -26,7 +26,7 @@
       <v-col cols="12" class="d-flex align-center justify-center px-5">
         <div style="max-width: 1500px">
           <v-img contain class="mb-8" src="../assets/sum-white.png" transition="scale-transition" height="80" />
-          <p class="text-white font-weight-medium text-center" style="color: #ffffff; font-size: larger">
+          <p class="text-white font-weight-regular text-center" style="color: #ffffff; font-size: larger">
             <b>SUM Studentski projekti</b> je web stranica koja omogućava pretraživanje, pregled i prijavu projekata napravljenih od strane studenata Sveučilišta u Mostaru. <br />
             Na stranicu se možete prijaviti pomoću eduID korisničkog računa.
           </p>
@@ -47,3 +47,27 @@
   }
 }
 </style>
+
+<script>
+
+export default {
+  name: "HomeView",
+
+  data: () => ({
+    //
+    
+  }),
+  computed: {
+      target () {
+         return "button"
+      },
+      options () {
+        return {
+          duration: 300,
+          offset: -800,
+        }
+      },
+    },
+};
+</script>
+
