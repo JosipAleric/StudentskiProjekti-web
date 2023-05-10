@@ -10,7 +10,7 @@
         <v-col lg="3" sm="12" class="d-flex align-start justify-center mb-5">
           <v-card class="v-card-profile" elevation="20" outlined width="400" shaped>
             <v-card-title class="mt-n15 d-flex justify-center">
-              <v-avatar color="primary" size="200"><v-img src="https://avatars.githubusercontent.com/u/85684603?v=4"></v-img></v-avatar>
+              <v-avatar color="primary" size="200"><v-img :src=this.userInfo.admin_url></v-img></v-avatar>
             </v-card-title>
             <v-card-text class="text-center">
               <h2 class="font-weight-light mb-4 black--text">{{ this.userInfo.login }}</h2>
