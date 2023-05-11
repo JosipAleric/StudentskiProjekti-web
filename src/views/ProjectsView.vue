@@ -2,14 +2,22 @@
   <v-container>
     <div class="mb-10 mx-3">
       <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studentski Projekti</h1>
-      <v-text-field v-model="user" label="Unesite GitHub username" hint="Unesite točan GitHub username" shaped outlined class=" font-weight-medium mx-auto" append-icon="mdi-magnify" style="max-width: 800px" v-on:keyup.enter="getUserInfo(), getUserProjects()" @click:append="getUserInfo(), getUserProjects()"></v-text-field>
-      <div style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255));"></div>
+      <v-text-field v-model="user" label="Unesite GitHub username" hint="Unesite točan GitHub username" shaped outlined
+        class=" font-weight-medium mx-auto" append-icon="mdi-magnify" style="max-width: 800px"
+        v-on:keyup.enter="getUserInfo(), getUserProjects()"
+        @click:append="getUserInfo(), getUserProjects()"></v-text-field>
+      <div
+        style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255));">
+      </div>
     </div>
+    <v-alert v-model="alert" text prominent type="error" icon="mdi-alert">
+      Došlo je do greške. Pogrešan unos ili problem sa slanjem zahtjeva. Provjerite unesene podatke ili probajte kasnije.
+    </v-alert>
     <v-card class="pa-5" outlined v-if="show">
       <v-row>
         <v-col lg="3" sm="12" class="d-flex align-start justify-center mb-5">
           <v-card class="v-card-profile" elevation="20" outlined width="400" shaped>
-            <v-card-title class="mt-n15 d-flex justify-center">
+            <v-card-title class="d-flex justify-center">
               <v-avatar color="primary" size="200"><v-img :src=this.userInfo.avatar_url></v-img></v-avatar>
             </v-card-title>
             <v-card-text class="text-center">
@@ -23,25 +31,27 @@
             </v-card-text>
 
             <v-card-actions class="mx-6 mb-3">
-              <v-btn color="primary" target="_blank" :href=this.userInfo.html_url block > <v-icon left dark> mdi mdi-github </v-icon>Posjeti GitHub </v-btn>
+              <v-btn color="primary" target="_blank" :href=this.userInfo.html_url block> <v-icon left dark> mdi mdi-github
+                </v-icon>Posjeti GitHub </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
 
-        <v-col cols="12" lg="9" >
+        <v-col cols="12" lg="9">
           <v-row dense>
-            <v-col cols="12" lg="6" md="6"  v-for="(project, index) in displayedProjects" :key="index">
+            <v-col cols="12" lg="6" md="6" v-for="(project, index) in displayedProjects" :key="index">
               <v-card outlined elevation="2">
                 <v-card-title class="text-subtitle-1 font-weight-bold primary--text mb-3">
                   <span>{{ project.name }}</span>
                   <v-spacer></v-spacer>
-                  <v-chip outlined small color="primary" >{{ project.visibility }}</v-chip>
+                  <v-chip outlined small color="primary">{{ project.visibility }}</v-chip>
                 </v-card-title>
-                <v-card-subtitle class="font-weight-medium"> {{ project.description  }}</v-card-subtitle>
+                <v-card-subtitle class="font-weight-medium"> {{ project.description }}</v-card-subtitle>
                 <v-card-actions class="ml-1 mt-n1">
                   <v-badge inline left dot class="text-subtitle-2"><span>{{ project.language }}</span></v-badge>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" small rounded :href=project.html_url target="_blank"> <v-icon left dark> mdi mdi-github </v-icon>GitHub Link </v-btn>
+                  <v-btn color="primary" small rounded :href=project.html_url target="_blank"> <v-icon left dark> mdi
+                      mdi-github </v-icon>GitHub Link </v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -59,6 +69,7 @@ export default {
   data: () => ({
     user: "",
     show: false,
+    alert: false,
     userInfo: [],
     userProjects: [],
     currentPage: 1,
@@ -66,19 +77,27 @@ export default {
   }),
   methods: {
     getUserInfo() {
-      this.axios.get("https://api.github.com/users/" + this.user).then((response) => {
-        console.log(response.data);
-        this.userInfo = response.data
-        this.show = true
-        console.log(this.userInfo);
-      });
+      this.axios
+        .get("https://api.github.com/users/" + this.user)
+        .then((response) => {
+          console.log(response.data);
+          this.userInfo = response.data;
+          this.show = true;
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+          this.alert = true
+          setTimeout(() => {
+            this.alert = false
+          }, "6000");
+        });
+
     },
-    getUserProjects(){
+    getUserProjects() {
       this.axios.get("https://api.github.com/users/" + this.user + "/repos").then((response) => {
         console.log(response.data);
         this.userProjects = response.data
         this.show = true
-        console.log(this.userProjects);
       });
     }
   },

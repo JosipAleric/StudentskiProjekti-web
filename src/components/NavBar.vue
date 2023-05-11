@@ -22,7 +22,7 @@
       </v-btn>
     </v-app-bar>
     
-    <v-navigation-drawer v-model="drawer" absolute left app temporary>
+    <v-navigation-drawer v-model="drawer" left app temporary>
       <v-list>
         <v-list-item style="background-color: #094776; margin-top: -9px" class="d-flex justify-center">
           <v-list-item-icon class="mx-auto">

@@ -2,7 +2,7 @@
   <div>
     <v-container >
       <v-row no-gutters style="height: 91vh">
-        <v-col cols="12" lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center" >
+        <v-col lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center" >
           <div>
             <v-divider class="my-8 hidden-md-and-down" style="border: 1px solid rgb(192, 191, 191)"></v-divider>
             <div class="my-8 hidden-lg-and-up"></div>
@@ -52,10 +52,8 @@
 
 export default {
   name: "HomeView",
-
   data: () => ({
     //
-    
   }),
   computed: {
       target () {
