@@ -31,7 +31,7 @@
             Na stranicu se možete prijaviti pomoću eduID korisničkog računa.
           </p>
           <div class="text-center mt-5">
-          <v-btn color="white" rounded outlined class="text-capitalize mr-2" height="47" width="auto">Pretraži projekte</v-btn>
+          <v-btn color="white" rounded outlined class="text-capitalize mr-2" height="47" width="auto" to="/projects">Pretraži projekte</v-btn>
           <v-btn color="white" rounded class="text-capitalize" height="47" width="auto">Prijavi se</v-btn>
         </div>
         </div>

@@ -28,11 +28,11 @@
           </v-card>
         </v-col>
 
-        <v-col cols="12" lg="9" sm="12">
+        <v-col cols="12" lg="9" >
           <v-row dense>
-            <v-col cols="12" lg="6" md="6" sm="12" v-for="project in userProjects" :key="project.id">
+            <v-col cols="12" lg="6" md="6"  v-for="(project, index) in displayedProjects" :key="index">
               <v-card outlined elevation="2">
-                <v-card-title class="text-subtitle-1 font-weight-bold primary--text text-center mb-3">
+                <v-card-title class="text-subtitle-1 font-weight-bold primary--text mb-3">
                   <span>{{ project.name }}</span>
                   <v-spacer></v-spacer>
                   <v-chip outlined small color="primary" >{{ project.visibility }}</v-chip>
@@ -41,11 +41,12 @@
                 <v-card-actions class="ml-1 mt-n1">
                   <v-badge inline left dot class="text-subtitle-2"><span>{{ project.language }}</span></v-badge>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary" small outlined rounded :href=project.html_url target="_blank"> <v-icon left dark> mdi mdi-github </v-icon>GitHub Link </v-btn>
+                  <v-btn color="primary" small rounded :href=project.html_url target="_blank"> <v-icon left dark> mdi mdi-github </v-icon>GitHub Link </v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
           </v-row>
+          <v-pagination class="mt-3" circle v-model="currentPage" :length="totalPages"></v-pagination>
         </v-col>
       </v-row>
     </v-card>
@@ -59,7 +60,9 @@ export default {
     user: "",
     show: false,
     userInfo: [],
-    userProjects: []
+    userProjects: [],
+    currentPage: 1,
+    cardsPerPage: 8
   }),
   methods: {
     getUserInfo() {
@@ -79,5 +82,15 @@ export default {
       });
     }
   },
+  computed: {
+    displayedProjects() {
+      const startIndex = (this.currentPage - 1) * this.cardsPerPage;
+      const endIndex = startIndex + this.cardsPerPage;
+      return this.userProjects.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      return Math.ceil(this.userProjects.length / this.cardsPerPage);
+    }
+  }
 };
 </script>

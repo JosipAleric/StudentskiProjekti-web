@@ -11,7 +11,7 @@
       <v-toolbar-items id="nav" class="hidden-sm-and-down">
         <div>
           <router-link to="/">Naslovnica</router-link>
-          <router-link to="/about">Projekti</router-link>
+          <router-link to="/projects">Projekti</router-link>
         </div>
       </v-toolbar-items>
 
@@ -40,7 +40,7 @@
             <v-list-item-title>Naslovnica</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/about">
+          <v-list-item to="/projects">
             <v-list-item-icon>
               <v-icon>mdi-file-document-multiple</v-icon>
             </v-list-item-icon>
