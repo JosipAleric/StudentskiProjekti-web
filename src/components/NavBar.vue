@@ -12,6 +12,7 @@
         <div>
           <router-link to="/">Naslovnica</router-link>
           <router-link to="/projects">Projekti</router-link>
+          <router-link to="/students">Studenti</router-link>
         </div>
       </v-toolbar-items>
 
@@ -45,6 +46,13 @@
               <v-icon>mdi-file-document-multiple</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Projekti</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/students">
+            <v-list-item-icon>
+              <v-icon>mdi mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Studenti</v-list-item-title>
           </v-list-item>
 
           <v-divider style="border: 1px solid rgb(192, 191, 191)" class="my-5"></v-divider>
