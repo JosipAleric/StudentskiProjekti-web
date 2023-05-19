@@ -1,82 +1,71 @@
 <template>
-  <v-container>
-    <div class="mb-4 mt-3 mx-3">
-      <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studentski Projekti</h1>
-      <p class="text-h6 text--secondary font-weight-regular text-center">
-        Prikaz svih prijavljenih studentskih projekata.
-      </p>
-    </div>
-    <div
-      style="height: 1px; margin-bottom: 40px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255));">
-    </div>
-    <!-- Table start -->
-    <v-card>
-      <!-- Table heading -->
-      <v-card-title>
-        <div class="v-card__title align-start mt-n3">
-          <div class="overflow-hidden
-                      mt-n7
-                      mb-n4
-                      transition-swing
-                      v-card--material__sheet
-                      v-sheet
-                      primary
-                      elevation-7
-                      rounded" 
-                      style="max-width: 100%;">
-            <div class="pa-7">
-              <i aria-hidden="true" class="v-icon notranslate mdi mdi-clipboard-text theme--dark">
-              </i>
-            </div>
-          </div>
-          <h3 class="font-weight-medium primary--text pl-3">
-            Projekti
-          </h3>
-        </div>
-        <v-spacer></v-spacer>
-        <!-- Table Search bar -->
-        <v-text-field v-model="search" class="mt-3 mt-md-0" append-icon="mdi-magnify" label="Search" hide-details
-          style="max-width: 400px"></v-text-field>
-      </v-card-title>
-      <v-data-table :headers="headers" :search="search" :items="APIdata" :items-per-page="5" class="elevation-1"
-        mobile-breakpoint="0">
-        <!-- Table Name column -->
-        <template v-slot:[`item.name`]="{ item }">
-          <td class="text-lg-left font-weight-medium body-1">
-            <div class="d-flex align-center">
-              <img src="https://api.pikwy.com/web/6463cc6007e0f77a30496398.jpg" width="110px" height="70px"
-                class="mr-4 my-2 rounded-lg" style="vertical-align: middle" />
-              <div class="d-flex flex-column">
-                <span class="mr-4" style="font-size: 16px"> {{ item.name }} </span>
-                <span class="mr-4 text--secondary" style="font-size: 14px"> Josip Aleric </span>
+  <div>
+    <v-container>
+      <div class="mb-4 mt-3 mx-3">
+        <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studentski Projekti</h1>
+        <p class="text-h6 text--secondary font-weight-regular text-center">Prikaz svih prijavljenih studentskih projekata.</p>
+      </div>
+      <div style="height: 1px; margin-bottom: 40px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255))"></div>
+      <!-- Table start -->
+      <v-card outlined elevation="11">
+        <!-- Table heading -->
+        <v-card-title>
+          <div class="v-card__title align-start mt-n5">
+            <div class="overflow-hidden mt-n7 mb-n4 transition-swing v-card--material__sheet v-sheet primary elevation-7 rounded" style="max-width: 100%">
+              <div class="pa-7">
+                <i aria-hidden="true" class="v-icon notranslate mdi mdi-clipboard-text theme--dark"> </i>
               </div>
             </div>
-          </td>
-        </template>
-        <!-- Table Date column -->
-        <template v-slot:[`item.datum`]="{ item }">
-          <td class="body-2">
-            {{ item.datum }}
-          </td>
-        </template>
-        <!-- Table Status column -->
-        <template v-slot:[`item.status`]="{ item }">
-          <td class="body-2">
-            <v-chip color="green" outlined small>{{ item.status }}</v-chip>
-          </td>
-        </template>
-        <!-- Table GitHub column -->
-        <template v-slot:[`item.github_link`]="{ item }">
-          <td class="body-2 text-center">
-            <v-btn color="primary" elevation="6" icon outlined class="my-auto" :href=item.github_link><v-icon> mdi
-                mdi-github</v-icon></v-btn>
-          </td>
-        </template>
-      </v-data-table>
-    </v-card>
-  </v-container>
+            <h3 class="font-weight-medium primary--text pl-3">Projekti</h3>
+          </div>
+          <v-spacer></v-spacer>
+          <!-- Table Search bar -->
+          <v-text-field v-model="search" class="mt-3 mt-md-0" prepend-inner-icon="mdi-magnify" label="Search" hide-details style="max-width: 400px"></v-text-field>
+        </v-card-title>
+        <v-data-table :headers="headers" :search="search" :items="APIdata" :items-per-page="5" class="elevation-1" mobile-breakpoint="0">
+          <!-- Table Name column -->
+          <template v-slot:[`item.name`]="{ item }">
+            <td class="text-lg-left font-weight-medium body-1" style="white-space: nowrap">
+              <div class="d-flex align-center">
+                <img src="https://api.pikwy.com/web/6467e1ff9e048a03591050ef.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg" style="vertical-align: middle; filter: brightness(70%);" />
+                <div class="d-flex flex-column">
+                  <span> {{ item.name }} </span>
+                  <span class="text--secondary subtitle-2">Josip Aleric </span>
+                </div>
+              </div>
+            </td>
+          </template>
+          <!-- Table Date column -->
+          <template v-slot:[`item.datum`]="{ item }">
+            <td class="body-1">
+              {{ item.datum }}
+            </td>
+          </template>
+          <!-- Table Status column -->
+          <template v-slot:[`item.status`]="{ item }">
+            <td class="body-1">
+              <v-chip color="green" outlined small>{{ item.status }}</v-chip>
+            </td>
+          </template>
+          <!-- Table GitHub column -->
+          <template v-slot:[`item.github_link`]="{ item }">
+            <td class="body-1 text-center">
+              <v-btn color="primary" elevation="6" icon outlined class="my-auto" :href="item.github_link"><v-icon> mdi mdi-github</v-icon></v-btn>
+            </td>
+          </template>
+        </v-data-table>
+      </v-card>
+    </v-container>
+    <v-tooltip left>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn dark color="primary" fab bottom right fixed v-bind="attrs" v-on="on">
+          <v-icon dark> mdi-plus </v-icon>
+        </v-btn>
+      </template>
+      <span>Dodaj novi projekt</span>
+    </v-tooltip>
+  </div>
 </template>
-
 
 <script>
 export default {
@@ -89,19 +78,16 @@ export default {
         sortable: false,
         value: "name",
         class: "subtitle-1 primary--text font-weight-bold title",
-        width: "300px"
       },
       {
         text: "Datum objave",
         value: "datum",
         class: "subtitle-1 primary--text font-weight-bold title",
-        width: "300px"
       },
       {
         text: "Status",
         value: "status",
         class: "subtitle-1 primary--text font-weight-bold title",
-        width: "300px"
       },
       {
         text: "Github link",
@@ -109,49 +95,55 @@ export default {
         align: "center",
         sortable: false,
         class: "subtitle-1 primary--text font-weight-bold title",
-        width: "300px"
-      }],
+      },
+    ],
 
-    APIdata: [{
-      "name": "Real Estate",
-      "datum": "28.08.2021",
-      "status": "Odobren",
-      "github_link": "https://pzi072023.sutdenti.sum.ba"
-    },
-    {
-      "name": "AutoSalon",
-      "datum": "19.05.2022",
-      "status": "Odobren",
-      "github_link": "https://pzi072023.sutdenti.sum.ba"
-    },
-    {
-      "name": "Real Estate",
-      "datum": "19.05.2022",
-      "status": "Odobren",
-      "github_link": "https://pzi072023.sutdenti.sum.ba"
-    },
+    APIdata: [
+      {
+        name: "Real Estate",
+        datum: "28.08.2021",
+        status: "Odobren",
+        github_link: "https://pzi072023.sutdenti.sum.ba",
+      },
+      {
+        name: "AutoSalon",
+        datum: "19.05.2022",
+        status: "Odobren",
+        github_link: "https://pzi072023.sutdenti.sum.ba",
+      },
+      {
+        name: "Studentski Projekti",
+        datum: "19.05.2022",
+        status: "Odobren",
+        github_link: "https://pzi072023.sutdenti.sum.ba",
+      },
 
-    {
-      "name": "Real Estate",
-      "datum": "19.05.2022",
-      "status": "Odobren",
-      "github_link": "https://pzi072023.sutdenti.sum.ba"
-    },
-    {
-      "name": "Real Estate",
-      "datum": "29.7.2021",
-      "status": "Odobren",
-      "github_link": "https://pzi072023.sutdenti.sum.ba"
-    },
-    {
-      "name": "Real Estate",
-      "datum": "21.1.2019",
-      "status": "Odobren",
-      "github_link": "https://pzi072023.sutdenti.sum.ba"
-    }],
+      {
+        name: "Auto Salon Backend",
+        datum: "19.05.2022",
+        status: "Odobren",
+        github_link: "https://pzi072023.sutdenti.sum.ba",
+      },
+      {
+        name: "Real Estate",
+        datum: "29.7.2021",
+        status: "Odobren",
+        github_link: "https://pzi072023.sutdenti.sum.ba",
+      },
+      {
+        name: "Real Estate",
+        datum: "21.1.2019",
+        status: "Odobren",
+        github_link: "https://pzi072023.sutdenti.sum.ba",
+      },
+    ],
   }),
-  methods: {
-
-  }
+  methods: {},
 };
 </script>
+
+<style>
+.v-application .body-1 {
+  font-family: "Poppins";
+}
+</style>
