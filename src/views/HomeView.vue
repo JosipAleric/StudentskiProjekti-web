@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-container >
+    <v-container>
       <!-- Hero section -->
-      <v-row no-gutters style="height: 90vh">
-        <v-col lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center" >
+      <v-row no-gutters style="min-height: 90vh">
+        <v-col lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center">
           <div>
             <v-divider class="my-8 hidden-md-and-down" style="border: 1px solid rgb(192, 191, 191)"></v-divider>
             <div class="my-8 hidden-lg-and-up"></div>
@@ -19,11 +19,11 @@
           </div>
         </v-col>
         <v-col cols="12" lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center">
-          <v-img :aspect-ratio="16 / 9" id="hero_image" src="../assets/images/landing/hero_image.jpg" alt="" transition="scale-transition"/>
+          <v-img :aspect-ratio="16 / 9" id="hero_image" src="../assets/images/landing/hero_image.jpg" alt="" transition="scale-transition" />
         </v-col>
       </v-row>
       <!-- Recent projects section -->
-      <div class="mx-auto mt-10 mt-lg-0 px-1" style="max-width: 1400px;">
+      <div class="mx-auto mt-10 mt-lg-0 px-1" style="max-width: 1400px">
         <div class="text-center">
           <h1 class="display-2 font-weight-medium text-center mb-2 primary--text">Projekti</h1>
           <p class="text-h6 text--secondary font-weight-regular">Na sekciji ispod nalazi se prikaz posljednjih projekata.</p>
@@ -35,8 +35,7 @@
               <div class="px-4 py-3">
                 <div class="d-flex">
                   <v-avatar color="primary rounded-lg" size="75">
-                    <v-img src="https://api.pikwy.com/web/6463cc6007e0f77a30496398.jpg"
-                      gradient="to top right, rgba(0,0,0,0.3), rgba(0,0,0,0.3)" />
+                    <v-img src="https://api.pikwy.com/web/6463cc6007e0f77a30496398.jpg" gradient="to top right, rgba(0,0,0,0.3), rgba(0,0,0,0.3)" />
                   </v-avatar>
                   <div class="mx-4 my-auto">
                     <h6 class="text-h6 font-weight-bold mb-0" style="color: #344767">Real Estate</h6>
@@ -69,9 +68,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <div
-          style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255)); margin: 35px 0px 25px 0px">
-        </div>
+        <div style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255)); margin: 35px 0px 25px 0px"></div>
         <div class="text-center">
           <v-btn class="text-capitalize font-weight-medium" color="primary" elevation="24" rounded height="45" to="/projects">Vidi sve projekte</v-btn>
         </div>
@@ -84,11 +81,12 @@
           <v-img contain class="mb-8" src="../assets/sum-white.png" transition="scale-transition" height="80" />
           <p class="text-white font-weight-regular text-center" style="color: #ffffff; font-size: larger">
             <b>SUM Studentski projekti</b> je web stranica koja omogućava pretraživanje, pregled i prijavu projekata napravljenih od strane studenata Sveučilišta u Mostaru. <br />
-            Na stranicu se možete prijaviti pomoću eduID korisničkog računa.</p>
+            Na stranicu se možete prijaviti pomoću eduID korisničkog računa.
+          </p>
           <div class="text-center mt-5">
-          <v-btn color="white" rounded outlined class="text-capitalize mr-2" height="47" width="auto" to="/projects">Pretraži projekte</v-btn>
-          <v-btn color="white" rounded class="text-capitalize" height="47" width="auto">Prijavi se</v-btn>
-        </div>
+            <v-btn color="white" rounded outlined class="text-capitalize mr-2" height="47" width="auto" to="/projects">Pretraži projekte</v-btn>
+            <v-btn color="white" rounded class="text-capitalize" height="47" width="auto">Prijavi se</v-btn>
+          </div>
         </div>
       </v-col>
     </v-row>
@@ -104,23 +102,21 @@
 </style>
 
 <script>
-
 export default {
   name: "HomeView",
   data: () => ({
     //
   }),
   computed: {
-      target () {
-         return "button"
-      },
-      options () {
-        return {
-          duration: 600,
-          offset: -2500,
-        }
-      },
+    target() {
+      return "button";
     },
+    options() {
+      return {
+        duration: 600,
+        offset: -2500,
+      };
+    },
+  },
 };
 </script>
-
