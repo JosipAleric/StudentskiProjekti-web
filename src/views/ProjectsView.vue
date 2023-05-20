@@ -27,7 +27,7 @@
           <template v-slot:[`item.name`]="{ item }">
             <td class="text-lg-left font-weight-medium body-1" style="white-space: nowrap">
               <div class="d-flex align-center">
-                <img src="https://api.pikwy.com/web/6467e1ff9e048a03591050ef.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg" style="vertical-align: middle; filter: brightness(70%);" />
+                <img src="https://api.pikwy.com/web/6467e1ff9e048a03591050ef.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg" style="vertical-align: middle; filter: brightness(70%)" />
                 <div class="d-flex flex-column">
                   <span> {{ item.name }} </span>
                   <span class="text--secondary subtitle-2">Josip Aleric </span>
@@ -56,20 +56,48 @@
         </v-data-table>
       </v-card>
     </v-container>
+    <!-- Dialog -->
     <v-tooltip left>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn dark color="primary" fab bottom right fixed v-bind="attrs" v-on="on">
+        <v-btn dark color="primary" fab bottom right fixed v-bind="attrs" v-on="on" @click="show_dialog = true">
           <v-icon dark> mdi-plus </v-icon>
         </v-btn>
       </template>
       <span>Dodaj novi projekt</span>
     </v-tooltip>
+    <v-dialog transition="dialog-top-transition" max-width="800" :value="show_dialog" @click:outside="show_dialog = false">
+      <v-card>
+        <v-toolbar color="primary" dark>
+          <v-app-bar-nav-icon>
+            <v-img contain src="../assets/sum-white.png" height="20" class="ml-5" />
+          </v-app-bar-nav-icon>
+          <v-toolbar-title>
+            <span style="font-size: 19px">Prijava projekta</span>
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-card-text>
+          <v-form class="mt-5" ref="form" @submit.prevent="submitForm">
+            <v-text-field v-model="firstName" :rules="nameRules" label="Ime" outlined shaped dense></v-text-field>
+            <v-text-field v-model="lastName" :rules="nameRules" label="Prezime" outlined shaped dense></v-text-field>
+            <v-text-field v-model="projectLink" :rules="projectLinkRules" label="Link projekta" outlined shaped dense></v-text-field>
+            <v-text-field v-model="github_link" :rules="projectLinkRules" label="GitHub Link" outlined shaped dense></v-text-field>
+            <v-text-field v-model="email" :rules="emailRules" label="E-mail" outlined shaped dense></v-text-field>
+          </v-form>
+          <div style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255)); margin-bottom: 8px;"></div>
+        </v-card-text>
+        <v-card-actions class="justify-center mt-n5">
+          <v-btn class="text-capitalize" color="primary" @click="show_dialog = false" outlined rounded><v-icon left dark> mdi-close </v-icon>Zatvori</v-btn>
+          <v-btn class="text-capitalize" color="primary" @click="submitForm()" rounded> <v-icon left dark> mdi-cloud-upload </v-icon> Prijavi projekt</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
+    show_dialog: false,
     search: "",
     headers: [
       {
@@ -97,6 +125,14 @@ export default {
         class: "subtitle-1 primary--text font-weight-bold title",
       },
     ],
+    firstName: "",
+    lastName: "",
+    projectLink: "",
+    github_link: "",
+    email: "",
+    emailRules: [(v) => !!v || "Email is required", (v) => /.+@.+\..+/.test(v) || "Email must be valid"],
+    projectLinkRules: [(v) => !!v || "Project Link is required", (v) => /^(ftp|http|https):\/\/[^ "]+$/.test(v) || "Project Link must be a valid URL"],
+    nameRules: [(v) => !!v || "Name is required"],
 
     APIdata: [
       {
@@ -138,7 +174,14 @@ export default {
       },
     ],
   }),
-  methods: {},
+  methods: {
+    submitForm() {
+      if (this.$refs.form.validate()) {
+        // Form is valid, you can perform your submission logic here
+        alert("Valid alert");
+      }
+    },
+  },
 };
 </script>
 

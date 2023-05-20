@@ -117,7 +117,7 @@ export default {
       options () {
         return {
           duration: 600,
-          offset: -1500,
+          offset: -2500,
         }
       },
     },

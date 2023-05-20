@@ -15,6 +15,7 @@
       <v-alert v-model="alert" text prominent type="error" icon="mdi-alert">
         Došlo je do greške. Pogrešan unos ili problem sa slanjem zahtjeva. Provjerite unesene podatke ili probajte kasnije.
       </v-alert>
+      <!-- GitHub account details -->
       <v-card class="pa-5" outlined v-if="show">
         <v-row>
           <v-col lg="3" sm="12" class="d-flex align-start justify-center mb-5">
