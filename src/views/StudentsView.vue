@@ -1,4 +1,5 @@
 <template>
+  <v-img src="../assets/background.jpg">
     <v-container>
       <div class="mb-10 mx-3">
         <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studenti</h1>
@@ -16,7 +17,7 @@
         Došlo je do greške. Pogrešan unos ili problem sa slanjem zahtjeva. Provjerite unesene podatke ili probajte kasnije.
       </v-alert>
       <!-- GitHub account details -->
-      <v-card class="pa-5" outlined v-if="show">
+      <v-card class="pa-5" elevation="0" v-if="show" style="background: transparent;">
         <v-row>
           <v-col lg="3" sm="12" class="d-flex align-start justify-center mb-5">
             <v-card class="v-card-profile" elevation="20" outlined width="400" shaped>
@@ -63,6 +64,7 @@
         </v-row>
       </v-card>
     </v-container>
+  </v-img>
   </template>
   
   <script>
@@ -78,10 +80,10 @@
     }),
     methods: {
       getUserInfo() {
+        this.axios.defaults.withCredentials = false;
         this.axios
           .get("https://api.github.com/users/" + this.user)
           .then((response) => {
-            console.log(response.data);
             this.userInfo = response.data;
             this.show = true;
           })
@@ -91,11 +93,11 @@
             setTimeout(() => {
               this.alert = false
             }, "6000");
-          });
+          }).finally(() => (this.axios.defaults.withCredentials = true));
       },
       getUserProjects() {
+        this.axios.defaults.withCredentials = false;
         this.axios.get("https://api.github.com/users/" + this.user + "/repos").then((response) => {
-          console.log(response.data);
           this.userProjects = response.data
           this.show = true
         }).catch((error) => {
@@ -104,7 +106,7 @@
             setTimeout(() => {
               this.alert = false
             }, "6000");
-          });
+          }).finally(() => (this.axios.defaults.withCredentials = true));
       }
     },
     computed: {

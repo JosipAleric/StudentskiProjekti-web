@@ -34,14 +34,15 @@
             <v-card outlined elevation="10" rounded="lg">
               <div class="px-4 py-3">
                 <div class="d-flex">
-                  <v-avatar color="primary rounded-lg" size="75">
-                    <v-img src="https://api.pikwy.com/web/6463cc6007e0f77a30496398.jpg" gradient="to top right, rgba(0,0,0,0.3), rgba(0,0,0,0.3)" />
+                  <v-avatar color="primary rounded-lg" size="75" style="width: 100px;">
+                    <!-- gradient="to top right, rgba(0,0,0,0.3), rgba(0,0,0,0.3)" -->
+                    <v-img src="../assets/images/no_project.jpg"  cover/>
                   </v-avatar>
                   <div class="mx-4 my-auto">
                     <h6 class="text-h6 font-weight-bold mb-0" style="color: #344767">Real Estate</h6>
                     <div class="d-flex">
                       <v-avatar size="20">
-                        <v-img src="https://api.eduid.sum.ba/users/jaleric01/avatar"></v-img>
+                        <v-img src="../assets/images/no_project.jpg"></v-img>
                       </v-avatar>
                       <p class="ml-1 my-auto text-subtitle-2 text--secondary">Josip Aleric</p>
                     </div>
@@ -77,10 +78,10 @@
     <!-- Footer section -->
     <v-row style="min-height: 500px; margin-top: 100px; background-color: #094776">
       <v-col cols="12" class="d-flex align-center justify-center px-5">
-        <div style="max-width: 1500px">
+        <div style="max-width: 1200px">
           <v-img contain class="mb-8" src="../assets/sum-white.png" transition="scale-transition" height="80" />
           <p class="text-white font-weight-regular text-center" style="color: #ffffff; font-size: larger">
-            <b>SUM Studentski projekti</b> je web stranica koja omogućava pretraživanje, pregled i prijavu projekata napravljenih od strane studenata Sveučilišta u Mostaru. <br />
+            <b>SUM Studentski projekti</b> je web stranica koja omogućava pretraživanje, pregled i prijavu projekata napravljenih od strane studenata Sveučilišta u Mostaru. 
             Na stranicu se možete prijaviti pomoću eduID korisničkog računa.
           </p>
           <div class="text-center mt-5">

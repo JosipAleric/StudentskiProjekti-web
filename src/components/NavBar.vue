@@ -2,9 +2,9 @@
   <div>
     <v-app-bar app color="white" dark height="110" flat>
       <v-app-bar-title class="ml-5">
-        <a href="/">
-          <v-img contain src="../assets/logo.png" height="80" transition="scale-transition" />
-        </a>
+        <router-link to="/">
+          <v-img contain src="../assets/logo.png" height="80" transition="scale-transition" to="/"/>
+        </router-link>
       </v-app-bar-title>
       <v-spacer></v-spacer>
 
@@ -17,12 +17,55 @@
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
-      <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto">Prijavi se</v-btn>
+      <!-- <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto" @click="login()"
+        v-if="!user">Prijavi se</v-btn> -->
+      <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto" 
+        v-if="!user">Prijavi se</v-btn>
+      <div class=" hidden-sm-and-down" v-if="user">
+        <v-menu offset-y rounded="lg">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on" class="d-flex align-center justify-center">
+              <v-avatar size="40px"
+                style="background-color: transparent; border: 2px solid #084776; border-radius: 50px;">
+                <v-row justify="center" >
+                  <v-col cols="12" class="text-center">
+                    <div class="font-weight-medium" style="color: #084776">
+                      {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-avatar>
+              <p class="pl-2 mr-n3 secondary--text my-auto">{{ user.first_name }} {{ user.last_name }}
+              </p>
+              <v-btn fab color="grey darken-1" icon>
+                <v-icon>
+                  mdi-chevron-down
+                </v-icon>
+              </v-btn>
+            </div>
+          </template>
+          <v-list>
+            <v-list-item style="min-height: 35px;" to='/profile'>
+              <v-icon class="pr-2" small>mdi mdi-account</v-icon>
+              <v-list-item-title>Profil</v-list-item-title>
+            </v-list-item>
+            <v-list-item style="min-height: 35px;">
+              <v-icon class="pr-2" small>mdi-file-document-multiple</v-icon>
+              <v-list-item-title>Moji projekti</v-list-item-title>
+            </v-list-item>
+            <v-list-item style="min-height: 35px;" @click="logout">
+              <v-icon class="pr-2" small>mdi mdi-logout</v-icon>
+              <v-list-item-title>Odjava</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
       <v-btn icon @click="drawer = !drawer" large class="mr-5">
         <v-app-bar-nav-icon color="primary" class="hidden-md-and-up"></v-app-bar-nav-icon>
       </v-btn>
     </v-app-bar>
-    
+
     <v-navigation-drawer v-model="drawer" left app temporary>
       <v-list>
         <v-list-item style="background-color: #094776; margin-top: -9px" class="d-flex justify-center">
@@ -57,16 +100,56 @@
 
           <v-divider style="border: 1px solid rgb(192, 191, 191)" class="my-5"></v-divider>
 
-          <v-list-item>
-            <v-btn color="primary" rounded class="text-capitalize" height="40" width="auto">Prijavi se</v-btn>
+          <v-list-item v-if="!user">
+            <v-btn color="primary" rounded class="text-capitalize" height="40" width="auto" @click="login()">Prijavi
+              se</v-btn>
           </v-list-item>
         </v-list-item-group>
       </v-list>
+
+      <v-menu offset-y rounded="lg" v-if="user">
+        <template v-slot:activator="{ on, attrs }">
+          <div v-bind="attrs" v-on="on" class="d-flex align-center justify-start ml-3 mt-n3">
+            <v-avatar size="40px" style="background-color: transparent; border: 2px solid #084776; border-radius: 50px;">
+              <v-row justify="center" align="top">
+                <v-col cols="12" class="text-center">
+                  <div class="font-weight-medium" style="color: #084776">
+                    {{ user.first_name.charAt(0) + user.last_name.charAt(0) }}
+                  </div>
+                </v-col>
+              </v-row>
+            </v-avatar>
+            <p class="pl-2 mr-n3 secondary--text my-auto">{{ user.first_name }} {{ user.last_name }}
+            </p>
+            <v-btn fab color="grey darken-1" icon>
+              <v-icon>
+                mdi-chevron-down
+              </v-icon>
+            </v-btn>
+          </div>
+        </template>
+        <v-list>
+          <v-list-item style="min-height: 35px;" to='/profile'>
+            <v-icon class="pr-2" small>mdi mdi-account</v-icon>
+            <v-list-item-title>Profil</v-list-item-title>
+          </v-list-item>
+          <v-list-item style="min-height: 35px;">
+            <v-icon class="pr-2" small>mdi-file-document-multiple</v-icon>
+            <v-list-item-title>Moji projekti</v-list-item-title>
+          </v-list-item>
+          <v-list-item style="min-height: 35px;" @click="useAuthStore().logout()">
+            <v-icon class="pr-2" small>mdi mdi-logout</v-icon>
+            <v-list-item-title>Odjava</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
+import { useAuthStore } from '../../store/auth'
+
 export default {
   name: "App",
 
@@ -74,7 +157,30 @@ export default {
     //
     drawer: false,
     group: null,
+    items: [
+      { title: 'Profil', icon: 'mdi mdi-account', to: '/profile' },
+      { title: 'Moji projekti', icon: 'mdi-file-document-multiple' },
+    ],
   }),
+
+  methods: {
+    login: function () {
+      window.location.href = `http://localhost:8000/oauth/login?redirect_to=${location.origin}`;
+    },
+    logout: function () {
+      return useAuthStore().logout();
+    },
+  },
+  computed: {
+    user() {
+      return useAuthStore().user;
+    },
+  },
+  async mounted(){
+    await useAuthStore().getUser();
+  }
+
+
 };
 </script>
 
@@ -82,6 +188,7 @@ export default {
 #app {
   font-family: "Poppins", sans-serif;
 }
+
 #nav {
   display: flex;
   align-items: center;

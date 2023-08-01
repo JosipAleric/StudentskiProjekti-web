@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-img src="../assets/background.jpg">
     <v-container>
       <div class="mb-4 mt-3 mx-3">
         <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studentski Projekti</h1>
@@ -7,7 +7,7 @@
       </div>
       <div style="height: 1px; margin-bottom: 40px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255))"></div>
       <!-- Table start -->
-      <v-card outlined elevation="11">
+      <v-card outlined elevation="11"  style="max-width: 1500px;" class="mx-auto">
         <!-- Table heading -->
         <v-card-title>
           <div class="v-card__title align-start mt-n5">
@@ -27,7 +27,7 @@
           <template v-slot:[`item.name`]="{ item }">
             <td class="text-lg-left font-weight-medium body-1" style="white-space: nowrap">
               <div class="d-flex align-center">
-                <img src="https://api.pikwy.com/web/6467e1ff9e048a03591050ef.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg" style="vertical-align: middle; filter: brightness(70%)" />
+                <img src="../assets/images/no_project.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg" style="vertical-align: middle;" />
                 <div class="d-flex flex-column">
                   <span> {{ item.name }} </span>
                   <span class="text--secondary subtitle-2">Josip Aleric </span>
@@ -91,7 +91,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
+  </v-img>
 </template>
 
 <script>
