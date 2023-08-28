@@ -101,7 +101,7 @@
           <v-divider style="border: 1px solid rgb(192, 191, 191)" class="my-5"></v-divider>
 
           <v-list-item v-if="!user">
-            <v-btn color="primary" rounded class="text-capitalize" height="40" width="auto" @click="login()">Prijavi
+            <v-btn color="primary" rounded class="text-capitalize" height="40" width="auto" to="/login">Prijavi
               se</v-btn>
           </v-list-item>
         </v-list-item-group>
