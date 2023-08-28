@@ -3,15 +3,20 @@
     <v-container>
       <div class="mb-4 mt-3 mx-3">
         <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studentski Projekti</h1>
-        <p class="text-h6 text--secondary font-weight-regular text-center">Prikaz svih prijavljenih studentskih projekata.</p>
+        <p class="text-h6 text--secondary font-weight-regular text-center">Prikaz svih prijavljenih studentskih projekata.
+        </p>
       </div>
-      <div style="height: 1px; margin-bottom: 40px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255))"></div>
+      <div
+        style="height: 1px; margin-bottom: 40px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255))">
+      </div>
       <!-- Table start -->
-      <v-card outlined elevation="11"  style="max-width: 1500px;" class="mx-auto">
+      <v-card outlined elevation="11" style="max-width: 1500px;" class="mx-auto">
         <!-- Table heading -->
         <v-card-title>
           <div class="v-card__title align-start mt-n5">
-            <div class="overflow-hidden mt-n7 mb-n4 transition-swing v-card--material__sheet v-sheet primary elevation-7 rounded" style="max-width: 100%">
+            <div
+              class="overflow-hidden mt-n7 mb-n4 transition-swing v-card--material__sheet v-sheet primary elevation-7 rounded"
+              style="max-width: 100%">
               <div class="pa-7">
                 <i aria-hidden="true" class="v-icon notranslate mdi mdi-clipboard-text theme--dark"> </i>
               </div>
@@ -20,14 +25,17 @@
           </div>
           <v-spacer></v-spacer>
           <!-- Table Search bar -->
-          <v-text-field v-model="search" class="mt-3 mt-md-0" prepend-inner-icon="mdi-magnify" label="Search" hide-details style="max-width: 400px"></v-text-field>
+          <v-text-field v-model="search" class="mt-3 mt-md-0" prepend-inner-icon="mdi-magnify" label="Search" hide-details
+            style="max-width: 400px"></v-text-field>
         </v-card-title>
-        <v-data-table :headers="headers" :search="search" :items="APIdata" :items-per-page="5" class="elevation-1" mobile-breakpoint="0">
+        <v-data-table :headers="headers" :search="search" :items="APIdata" :items-per-page="5" class="elevation-1"
+          mobile-breakpoint="0">
           <!-- Table Name column -->
           <template v-slot:[`item.name`]="{ item }">
             <td class="text-lg-left font-weight-medium body-1" style="white-space: nowrap">
               <div class="d-flex align-center">
-                <img src="../assets/images/no_project.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg" style="vertical-align: middle;" />
+                <img src="../assets/images/no_project.jpg" width="110px" height="70px" class="mr-4 my-3 rounded-lg"
+                  style="vertical-align: middle;" />
                 <div class="d-flex flex-column">
                   <span> {{ item.name }} </span>
                   <span class="text--secondary subtitle-2">Josip Aleric </span>
@@ -50,7 +58,8 @@
           <!-- Table GitHub column -->
           <template v-slot:[`item.github_link`]="{ item }">
             <td class="body-1 text-center">
-              <v-btn color="primary" elevation="6" icon outlined class="my-auto" :href="item.github_link"><v-icon> mdi mdi-github</v-icon></v-btn>
+              <v-btn color="primary" elevation="6" icon outlined class="my-auto" :href="item.github_link"><v-icon> mdi
+                  mdi-github</v-icon></v-btn>
             </td>
           </template>
         </v-data-table>
@@ -65,7 +74,8 @@
       </template>
       <span>Dodaj novi projekt</span>
     </v-tooltip>
-    <v-dialog transition="dialog-top-transition" max-width="800" :value="show_dialog" @click:outside="show_dialog = false">
+    <v-dialog transition="dialog-top-transition" max-width="600" :value="show_dialog"
+      @click:outside="show_dialog = false">
       <v-card>
         <v-toolbar color="primary" dark>
           <v-app-bar-nav-icon>
@@ -77,25 +87,35 @@
         </v-toolbar>
         <v-card-text>
           <v-form class="mt-5" ref="form" @submit.prevent="submitForm">
-            <v-text-field v-model="firstName" :rules="nameRules" label="Ime" outlined shaped dense></v-text-field>
-            <v-text-field v-model="lastName" :rules="nameRules" label="Prezime" outlined shaped dense></v-text-field>
-            <v-text-field v-model="projectLink" :rules="projectLinkRules" label="Link projekta" outlined shaped dense></v-text-field>
-            <v-text-field v-model="github_link" :rules="projectLinkRules" label="GitHub Link" outlined shaped dense></v-text-field>
-            <v-text-field v-model="email" :rules="emailRules" label="E-mail" outlined shaped dense></v-text-field>
+            <v-text-field v-model="projectName" :rules="nameRules" label="Naziv projekta" outlined shaped
+              dense></v-text-field>
+            <v-text-field v-model="projectLink" :rules="projectLinkRules" label="Link projekta" outlined shaped
+              dense></v-text-field>
+            <v-text-field v-model="github_link" :rules="projectLinkRules" label="GitHub Link" outlined shaped
+              dense></v-text-field>
           </v-form>
-          <div style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255)); margin-bottom: 8px;"></div>
+          <div
+            style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255)); margin-bottom: 8px;">
+          </div>
         </v-card-text>
         <v-card-actions class="justify-center mt-n5">
-          <v-btn class="text-capitalize" color="primary" @click="show_dialog = false" outlined rounded><v-icon left dark> mdi-close </v-icon>Zatvori</v-btn>
-          <v-btn class="text-capitalize" color="primary" @click="submitForm()" rounded> <v-icon left dark> mdi-cloud-upload </v-icon> Prijavi projekt</v-btn>
+          <v-btn class="text-capitalize" color="primary" @click="show_dialog = false" outlined rounded><v-icon left dark>
+              mdi-close </v-icon>Zatvori</v-btn>
+          <v-btn class="text-capitalize" color="primary" @click="submitForm()" rounded> <v-icon left dark>
+              mdi-cloud-upload </v-icon> Prijavi projekt</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <snackbar :snackbar="snackbar"></snackbar>
   </v-img>
 </template>
 
 <script>
+import Snackbar from '../components/SnackBar.vue'
 export default {
+  components: {
+    Snackbar
+  },
   data: () => ({
     show_dialog: false,
     search: "",
@@ -125,12 +145,9 @@ export default {
         class: "subtitle-1 primary--text font-weight-bold title",
       },
     ],
-    firstName: "",
-    lastName: "",
+    projectName: "",
     projectLink: "",
     github_link: "",
-    email: "",
-    emailRules: [(v) => !!v || "Email is required", (v) => /.+@.+\..+/.test(v) || "Email must be valid"],
     projectLinkRules: [(v) => !!v || "Project Link is required", (v) => /^(ftp|http|https):\/\/[^ "]+$/.test(v) || "Project Link must be a valid URL"],
     nameRules: [(v) => !!v || "Name is required"],
 
@@ -173,20 +190,56 @@ export default {
         github_link: "https://pzi072023.sutdenti.sum.ba",
       },
     ],
+    snackbar: {
+     visible: false,
+     color: "success",
+     message: null,
+    },
   }),
+
+
   methods: {
     submitForm() {
       if (this.$refs.form.validate()) {
-        // Form is valid, you can perform your submission logic here
-        alert("Valid alert");
+        let project = {
+          name: this.projectName,
+          status: "Na čekanju",
+          web_link: this.projectLink,
+          github_link: this.github_link,
+        };
+
+        this.axios
+          .post("http://127.0.0.1:8000/api/projects/create", project)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error("Error occurred:", error);
+            if (error.response.status == 401) {
+              this.$router.push("/login");
+            }
+          });
       }
+    },
+    createProject() {
+      this.axios
+        .post("http://127.0.0.1:8000/api/projects/create", this.project)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+        })
+    },
+    showSnackbar(visible, color, message) {
+     this.snackbar.visible = visible;
+     this.snackbar.color = color;
+     this.snackbar.message = message;
     },
   },
 };
 </script>
 
-<style>
-.v-application .body-1 {
+<style>.v-application .body-1 {
   font-family: "Poppins";
-}
-</style>
+}</style>

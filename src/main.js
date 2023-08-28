@@ -7,8 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { createPinia, PiniaVuePlugin } from 'pinia'
 
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
 
 Vue.use(VueAxios, axios)
 Vue.use(PiniaVuePlugin)

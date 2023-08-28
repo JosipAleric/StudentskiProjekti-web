@@ -1,5 +1,5 @@
 <template>
-  <v-img src="../assets/background.jpg">
+  <v-img src="../assets/background.jpg" style="min-height: 100vh;">
     <v-container>
       <div class="mb-10 mx-3">
         <h1 class="display-2 font-weight-bold mb-3 text-center" style="color: #094776">Studenti</h1>
@@ -79,13 +79,14 @@
       cardsPerPage: 8
     }),
     methods: {
-      getUserInfo() {
+      async getUserInfo() {
         this.axios.defaults.withCredentials = false;
-        this.axios
+        await this.axios
           .get("https://api.github.com/users/" + this.user)
           .then((response) => {
             this.userInfo = response.data;
             this.show = true;
+            this.getUserProjects()
           })
           .catch((error) => {
             console.error("Error occurred:", error);
@@ -95,9 +96,9 @@
             }, "6000");
           }).finally(() => (this.axios.defaults.withCredentials = true));
       },
-      getUserProjects() {
+      async getUserProjects() {
         this.axios.defaults.withCredentials = false;
-        this.axios.get("https://api.github.com/users/" + this.user + "/repos").then((response) => {
+        await this.axios.get("https://api.github.com/users/" + this.user + "/repos").then((response) => {
           this.userProjects = response.data
           this.show = true
         }).catch((error) => {
@@ -106,7 +107,7 @@
             setTimeout(() => {
               this.alert = false
             }, "6000");
-          }).finally(() => (this.axios.defaults.withCredentials = true));
+          })
       }
     },
     computed: {

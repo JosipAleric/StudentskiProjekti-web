@@ -17,10 +17,10 @@
       </v-toolbar-items>
 
       <v-spacer></v-spacer>
-      <!-- <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto" @click="login()"
-        v-if="!user">Prijavi se</v-btn> -->
-      <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto" 
+      <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto" to="/login"
         v-if="!user">Prijavi se</v-btn>
+      <!-- <v-btn color="primary" rounded class="text-capitalize hidden-sm-and-down" height="45" width="auto" 
+        v-if="!user">Prijavi se</v-btn> -->
       <div class=" hidden-sm-and-down" v-if="user">
         <v-menu offset-y rounded="lg">
           <template v-slot:activator="{ on, attrs }">
@@ -137,7 +137,7 @@
             <v-icon class="pr-2" small>mdi-file-document-multiple</v-icon>
             <v-list-item-title>Moji projekti</v-list-item-title>
           </v-list-item>
-          <v-list-item style="min-height: 35px;" @click="useAuthStore().logout()">
+          <v-list-item style="min-height: 35px;" @click="logout">
             <v-icon class="pr-2" small>mdi mdi-logout</v-icon>
             <v-list-item-title>Odjava</v-list-item-title>
           </v-list-item>
@@ -154,7 +154,6 @@ export default {
   name: "App",
 
   data: () => ({
-    //
     drawer: false,
     group: null,
     items: [
@@ -168,6 +167,7 @@ export default {
       window.location.href = `http://localhost:8000/oauth/login?redirect_to=${location.origin}`;
     },
     logout: function () {
+      this.$router.push('/')
       return useAuthStore().logout();
     },
   },
