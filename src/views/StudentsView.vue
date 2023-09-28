@@ -8,7 +8,7 @@
         <v-text-field v-model="user" label="Unesite GitHub username studenta" hint="Unesite točan GitHub username" shaped outlined
           class=" font-weight-medium mx-auto" append-icon="mdi-magnify" style="max-width: 800px"
           v-on:keyup.enter="getUserInfo(), getUserProjects()"
-          @click:append="getUserInfo(), getUserProjects()"></v-text-field>
+          @click:append="getUserInfo(), getUserProjects()" :disabled="true"></v-text-field>
         <div
           style="height: 1px; background: linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 71, 118), rgb(255, 255, 255));">
         </div>

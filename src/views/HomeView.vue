@@ -3,7 +3,7 @@
     <v-container>
       <!-- Hero section -->
       <v-row no-gutters style="min-height: 90vh">
-        <v-col lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center">
+        <v-col cols="12" lg="6" class="d-flex align-center justify-center">
           <div>
             <v-divider class="my-8 hidden-md-and-down" style="border: 1px solid rgb(192, 191, 191)"></v-divider>
             <div class="my-8 hidden-lg-and-up"></div>
@@ -18,7 +18,7 @@
             <v-divider class="my-8" style="border: 1px solid rgb(192, 191, 191)"></v-divider>
           </div>
         </v-col>
-        <v-col cols="12" lg="6" md="12" sm="12" xs="12" class="d-flex align-center justify-center">
+        <v-col cols="12" lg="6" class="d-flex align-center justify-center">
           <v-img :aspect-ratio="16 / 9" id="hero_image" src="../assets/images/landing/hero_image.jpg" alt="" transition="scale-transition" />
         </v-col>
       </v-row>

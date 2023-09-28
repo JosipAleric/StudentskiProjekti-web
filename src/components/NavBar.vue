@@ -49,9 +49,13 @@
               <v-icon class="pr-2" small>mdi mdi-account</v-icon>
               <v-list-item-title>Profil</v-list-item-title>
             </v-list-item>
-            <v-list-item style="min-height: 35px;">
+            <v-list-item style="min-height: 35px;" to="/my_projects">
               <v-icon class="pr-2" small>mdi-file-document-multiple</v-icon>
               <v-list-item-title>Moji projekti</v-list-item-title>
+            </v-list-item>
+            <v-list-item style="min-height: 35px;"  to='/dashboard' v-if="user.is_admin">
+              <v-icon class="pr-2" small>mdi-application-cog</v-icon>
+              <v-list-item-title>Upravljaj projektima</v-list-item-title>
             </v-list-item>
             <v-list-item style="min-height: 35px;" @click="logout">
               <v-icon class="pr-2" small>mdi mdi-logout</v-icon>
@@ -133,10 +137,14 @@
             <v-icon class="pr-2" small>mdi mdi-account</v-icon>
             <v-list-item-title>Profil</v-list-item-title>
           </v-list-item>
-          <v-list-item style="min-height: 35px;">
+          <v-list-item style="min-height: 35px;" to="my_projects">
             <v-icon class="pr-2" small>mdi-file-document-multiple</v-icon>
             <v-list-item-title>Moji projekti</v-list-item-title>
           </v-list-item>
+          <v-list-item style="min-height: 35px;"  to='/dashboard' v-if="user.is_admin">
+              <v-icon class="pr-2" small>mdi-application-cog</v-icon>
+              <v-list-item-title>Upravljaj projektima</v-list-item-title>
+            </v-list-item>
           <v-list-item style="min-height: 35px;" @click="logout">
             <v-icon class="pr-2" small>mdi mdi-logout</v-icon>
             <v-list-item-title>Odjava</v-list-item-title>
@@ -163,24 +171,21 @@ export default {
   }),
 
   methods: {
-    login: function () {
-      window.location.href = `http://localhost:8000/oauth/login?redirect_to=${location.origin}`;
-    },
     logout: function () {
       this.$router.push('/')
       return useAuthStore().logout();
     },
   },
+
   computed: {
     user() {
       return useAuthStore().user;
     },
   },
+
   async mounted(){
     await useAuthStore().getUser();
   }
-
-
 };
 </script>
 

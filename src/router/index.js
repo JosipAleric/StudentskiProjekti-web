@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/projects',
     name: 'projects',
-    component: () => import('../views/ProjectsView.vue')
+    component: () => import('../views/projects/ProjectsView.vue')
   },
   {
     path: '/students',
@@ -26,11 +26,6 @@ const routes = [
     component: () => import('../views/ProfileView.vue')
   },
   {
-    path: '/test',
-    name: 'test',
-    component: () => import('../views/TestView.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('../views/auth/LoginView.vue')
@@ -39,6 +34,16 @@ const routes = [
     path: '/register',
     name: 'register',
     component: () => import('../views/auth/RegisterView.vue')
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/projects/AdminDashboard.vue')
+  },
+  {
+    path: '/my_projects',
+    name: 'my_projects',
+    component: () => import('../views/projects/UserProjectsView.vue')
   },
 ]
 

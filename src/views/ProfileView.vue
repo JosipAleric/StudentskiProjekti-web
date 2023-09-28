@@ -131,7 +131,7 @@ export default {
   
 <style>
 .v-application .body-1 {
-  font-family: "Poppins";
+  font-family: "Poppins" !important;
 }
 </style>
   
